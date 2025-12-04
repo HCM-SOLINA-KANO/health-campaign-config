@@ -1,0 +1,626 @@
+{
+  "populationCoverageHeatMap": [
+    {
+      "destMapLayerIndex": "copy-minjibir-wards",
+      "mapIndexIdVsBoundaryQuery": {
+        "size": 200,
+        "_source": [
+          "Data.boundaryHierarchy.ward"
+        ]
+      },
+      "targetsQuery": {
+        "size": 0,
+        "query": {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "Data.targetType.keyword": {
+                    "value": "INDIVIDUAL"
+                  }
+                }
+              }
+            ],
+            "must_not": [
+              {
+                "exists": {
+                  "field": "Data.boundaryHierarchy.healthFacility"
+                }
+              }
+            ]
+          }
+        },
+        "aggs": {
+          "WARDS": {
+            "terms": {
+              "field": "Data.boundaryHierarchy.ward.keyword",
+              "size": 100
+            },
+            "aggs": {
+              "TARGETS": {
+                "sum": {
+                  "field": "Data.overallTarget"
+                }
+              }
+            }
+          }
+        }
+      },
+      "membersRegisteredQuery": {
+        "size": 0,
+        "query": {
+          "bool": {
+            "must": [
+              {
+                "range": {
+                  "Data.age": {
+                    "gte": 60
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "aggs": {
+          "WARDS": {
+            "terms": {
+              "field": "Data.boundaryHierarchy.ward.keyword",
+              "size": 100
+            },
+            "aggs": {
+              "REGISTERED": {
+                "value_count": {
+                  "field": "Data.householdMember.individualClientReferenceId.keyword"
+                }
+              }
+            }
+          }
+        }
+      },
+      "boundaryBucketsPath": "WARDS",
+      "targetsValuePath": "TARGETS",
+      "registeredPath": "REGISTERED"
+    }
+  ],
+  "householdCoverageHeatMap": [
+    {
+      "destMapLayerIndex": "copy-kano-state",
+      "mapIndexIdVsBoundaryQuery": {
+        "size": 200,
+        "_source": [
+          "Data.boundaryHierarchy.state"
+        ]
+      },
+      "targetsQuery": {
+        "size": 0,
+        "query": {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "Data.targetType.keyword": {
+                    "value": "HOUSEHOLD"
+                  }
+                }
+              }
+            ],
+            "must_not": [
+              {
+                "exists": {
+                  "field": "Data.boundaryHierarchy.lga"
+                }
+              }
+            ]
+          }
+        },
+        "aggs": {
+          "STATES": {
+            "terms": {
+              "field": "Data.boundaryHierarchy.state.keyword",
+              "size": 100
+            },
+            "aggs": {
+              "TARGETS": {
+                "sum": {
+                  "field": "Data.overallTarget"
+                }
+              }
+            }
+          }
+        }
+      },
+      "householdsRegisteredQuery": {
+        "size": 0,
+        "query": {
+          "bool": {
+            "must": []
+          }
+        },
+        "aggs": {
+          "STATES": {
+            "terms": {
+              "field": "Data.boundaryHierarchy.state.keyword",
+              "size": 100
+            },
+            "aggs": {
+              "REGISTERED": {
+                "value_count": {
+                  "field": "Data.household.id.keyword"
+                }
+              }
+            }
+          }
+        }
+      },
+      "boundaryBucketsPath": "STATES",
+      "targetsValuePath": "TARGETS",
+      "registeredPath": "REGISTERED"
+    },
+    {
+      "destMapLayerIndex": "copy-minjibir-lga",
+      "mapIndexIdVsBoundaryQuery": {
+        "size": 200,
+        "_source": [
+          "Data.boundaryHierarchy.lga"
+        ]
+      },
+      "targetsQuery": {
+        "size": 0,
+        "query": {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "Data.targetType.keyword": {
+                    "value": "HOUSEHOLD"
+                  }
+                }
+              }
+            ],
+            "must_not": [
+              {
+                "exists": {
+                  "field": "Data.boundaryHierarchy.ward"
+                }
+              }
+            ]
+          }
+        },
+        "aggs": {
+          "LGAS": {
+            "terms": {
+              "field": "Data.boundaryHierarchy.lga.keyword",
+              "size": 100
+            },
+            "aggs": {
+              "TARGETS": {
+                "sum": {
+                  "field": "Data.overallTarget"
+                }
+              }
+            }
+          }
+        }
+      },
+      "householdsRegisteredQuery": {
+        "size": 0,
+        "query": {
+          "bool": {
+            "must": []
+          }
+        },
+        "aggs": {
+          "LGAS": {
+            "terms": {
+              "field": "Data.boundaryHierarchy.lga.keyword",
+              "size": 100
+            },
+            "aggs": {
+              "REGISTERED": {
+                "value_count": {
+                  "field": "Data.household.id.keyword"
+                }
+              }
+            }
+          }
+        }
+      },
+      "boundaryBucketsPath": "LGAS",
+      "targetsValuePath": "TARGETS",
+      "registeredPath": "REGISTERED"
+    },
+    {
+      "destMapLayerIndex": "copy-minjibir-wards",
+      "mapIndexIdVsBoundaryQuery": {
+        "size": 200,
+        "_source": [
+          "Data.boundaryHierarchy.ward"
+        ]
+      },
+      "targetsQuery": {
+        "size": 0,
+        "query": {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "Data.targetType.keyword": {
+                    "value": "HOUSEHOLD"
+                  }
+                }
+              }
+            ],
+            "must_not": [
+              {
+                "exists": {
+                  "field": "Data.boundaryHierarchy.healthFacility"
+                }
+              }
+            ]
+          }
+        },
+        "aggs": {
+          "WARDS": {
+            "terms": {
+              "field": "Data.boundaryHierarchy.ward.keyword",
+              "size": 100
+            },
+            "aggs": {
+              "TARGETS": {
+                "sum": {
+                  "field": "Data.overallTarget"
+                }
+              }
+            }
+          }
+        }
+      },
+      "householdsRegisteredQuery": {
+        "size": 0,
+        "query": {
+          "bool": {
+            "must": []
+          }
+        },
+        "aggs": {
+          "WARDS": {
+            "terms": {
+              "field": "Data.boundaryHierarchy.ward.keyword",
+              "size": 100
+            },
+            "aggs": {
+              "REGISTERED": {
+                "value_count": {
+                  "field": "Data.household.id.keyword"
+                }
+              }
+            }
+          }
+        }
+      },
+      "boundaryBucketsPath": "WARDS",
+      "targetsValuePath": "TARGETS",
+      "registeredPath": "REGISTERED"
+    }
+  ],
+  "deliveredCoverageHeatMap": [
+    {
+      "destMapLayerIndex": "copy-kano-state",
+      "mapIndexIdVsBoundaryQuery": {
+        "size": 200,
+        "_source": [
+          "Data.boundaryHierarchy.state"
+        ]
+      },
+      "targetsQuery": {
+        "size": 0,
+        "query": {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "Data.targetType.keyword": {
+                    "value": "INDIVIDUAL"
+                  }
+                }
+              }
+            ],
+            "must_not": [
+              {
+                "exists": {
+                  "field": "Data.boundaryHierarchy.lga"
+                }
+              }
+            ]
+          }
+        },
+        "aggs": {
+          "STATE": {
+            "terms": {
+              "field": "Data.boundaryHierarchy.state.keyword",
+              "size": 100
+            },
+            "aggs": {
+              "TARGETS": {
+                "sum": {
+                  "field": "Data.overallTarget"
+                }
+              }
+            }
+          }
+        }
+      },
+      "deliveredQuery": {
+        "size": 0,
+        "query": {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "Data.productName.keyword": {
+                    "value": "Albendazole 400mg"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "aggs": {
+          "STATE": {
+            "terms": {
+              "field": "Data.boundaryHierarchy.state.keyword",
+              "size": 100
+            },
+            "aggs": {
+              "DELIVERED": {
+                "value_count": {
+                  "field": "Data.taskId.keyword"
+                }
+              }
+            }
+          }
+        }
+      },
+      "boundaryBucketsPath": "STATE",
+      "targetsValuePath": "TARGETS",
+      "deliveredPath": "DELIVERED"
+    },
+    {
+      "destMapLayerIndex": "copy-minjibir-lga",
+      "mapIndexIdVsBoundaryQuery": {
+        "size": 200,
+        "_source": [
+          "Data.boundaryHierarchy.lga"
+        ]
+      },
+      "targetsQuery": {
+        "size": 0,
+        "query": {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "Data.targetType.keyword": {
+                    "value": "INDIVIDUAL"
+                  }
+                }
+              }
+            ],
+            "must_not": [
+              {
+                "exists": {
+                  "field": "Data.boundaryHierarchy.ward"
+                }
+              }
+            ]
+          }
+        },
+        "aggs": {
+          "LGAS": {
+            "terms": {
+              "field": "Data.boundaryHierarchy.lga.keyword",
+              "size": 100
+            },
+            "aggs": {
+              "TARGETS": {
+                "sum": {
+                  "field": "Data.overallTarget"
+                }
+              }
+            }
+          }
+        }
+      },
+      "deliveredQuery": {
+        "size": 0,
+        "query": {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "Data.productName.keyword": {
+                    "value": "Albendazole 400mg"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "aggs": {
+          "LGAS": {
+            "terms": {
+              "field": "Data.boundaryHierarchy.lga.keyword",
+              "size": 100
+            },
+            "aggs": {
+              "DELIVERED": {
+                "value_count": {
+                  "field": "Data.taskId.keyword"
+                }
+              }
+            }
+          }
+        }
+      },
+      "boundaryBucketsPath": "LGAS",
+      "targetsValuePath": "TARGETS",
+      "deliveredPath": "DELIVERED"
+    },
+    {
+      "destMapLayerIndex": "copy-minjibir-wards",
+      "mapIndexIdVsBoundaryQuery": {
+        "size": 200,
+        "_source": [
+          "Data.boundaryHierarchy.ward"
+        ]
+      },
+      "targetsQuery": {
+        "size": 0,
+        "query": {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "Data.targetType.keyword": {
+                    "value": "INDIVIDUAL"
+                  }
+                }
+              }
+            ],
+            "must_not": [
+              {
+                "exists": {
+                  "field": "Data.boundaryHierarchy.healthFacility"
+                }
+              }
+            ]
+          }
+        },
+        "aggs": {
+          "WARDS": {
+            "terms": {
+              "field": "Data.boundaryHierarchy.ward.keyword",
+              "size": 100
+            },
+            "aggs": {
+              "TARGETS": {
+                "sum": {
+                  "field": "Data.overallTarget"
+                }
+              }
+            }
+          }
+        }
+      },
+      "deliveredQuery": {
+        "size": 0,
+        "query": {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "Data.productName.keyword": {
+                    "value": "Albendazole 400mg"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "aggs": {
+          "WARDS": {
+            "terms": {
+              "field": "Data.boundaryHierarchy.ward.keyword",
+              "size": 100
+            },
+            "aggs": {
+              "DELIVERED": {
+                "value_count": {
+                  "field": "Data.taskId.keyword"
+                }
+              }
+            }
+          }
+        }
+      },
+      "boundaryBucketsPath": "WARDS",
+      "targetsValuePath": "TARGETS",
+      "deliveredPath": "DELIVERED"
+    }
+  ],
+  "productCoverageHeatMap": [
+    {
+      "destMapLayerIndex": "copy-minjibir-wards",
+      "mapIndexIdVsBoundaryQuery": {
+        "size": 200,
+        "_source": [
+          "Data.boundaryHierarchy.ward"
+        ]
+      },
+      "targetsQuery": {
+        "size": 0,
+        "query": {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "Data.targetType.keyword": {
+                    "value": "PRODUCT"
+                  }
+                }
+              }
+            ],
+            "must_not": [
+              {
+                "exists": {
+                  "field": "Data.boundaryHierarchy.healthFacility"
+                }
+              }
+            ]
+          }
+        },
+        "aggs": {
+          "WARDS": {
+            "terms": {
+              "field": "Data.boundaryHierarchy.ward.keyword",
+              "size": 100
+            },
+            "aggs": {
+              "TARGETS": {
+                "sum": {
+                  "field": "Data.overallTarget"
+                }
+              }
+            }
+          }
+        }
+      },
+      "productDeliveredQuery": {
+        "size": 0,
+        "query": {
+          "bool": {
+            "must": []
+          }
+        },
+        "aggs": {
+          "WARDS": {
+            "terms": {
+              "field": "Data.boundaryHierarchy.ward.keyword",
+              "size": 100
+            },
+            "aggs": {
+              "DELIVERED": {
+                "sum": {
+                  "field": "Data.quantity"
+                }
+              }
+            }
+          }
+        }
+      },
+      "boundaryBucketsPath": "WARDS",
+      "targetsValuePath": "TARGETS",
+      "deliveredPath": "DELIVERED"
+    }
+  ]
+}
