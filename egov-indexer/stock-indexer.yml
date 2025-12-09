@@ -48,6 +48,8 @@ ServiceMaps:
                 outJsonPath: $.Data.userAddress
               - inJsonPath: $.additionalDetails
                 outJsonPath: $.Data.additionalDetails
+              - inJsonPath: $.tenantId
+                outJsonPath: $.Data.tenantId
           timeStampField: $.createdTime
 
     - topic: transformer-producer-stock-recon-index-v1-topic
