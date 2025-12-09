@@ -46,6 +46,8 @@ ServiceMaps:
                 outJsonPath: $.Data.syncedDate
               - inJsonPath: $.userAddress
                 outJsonPath: $.Data.userAddress
+              - inJsonPath: $.tenantId
+                outJsonPath: $.Data.tenantId
           timeStampField: $.referral.auditDetails.lastModifiedTime
 
     - topic: delete-referral-topic
@@ -104,6 +106,8 @@ ServiceMaps:
                 outJsonPath: $.Data.userAddress
               - inJsonPath: $.additionalDetails
                 outJsonPath: $.Data.additionalDetails
+              - inJsonPath: $.tenantId
+                outJsonPath: $.Data.tenantId
           timeStampField: $.sideEffect.auditDetails.lastModifiedTime
 
     - topic: delete-side-effect-topic
