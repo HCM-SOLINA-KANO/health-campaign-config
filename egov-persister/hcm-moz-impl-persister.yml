@@ -285,7 +285,7 @@ serviceMaps:
       fromTopic: create-boundaryCSV-data
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO eg_dhis2_boundary_csv(id, name, parent, path, children, boundaryLevel, boundary, source, campaignStartDate, campaignEndDate, objectNode, createdBy, lastModifiedBy, createdTime, lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET name=?, parent=?, path=?, children=?, boundaryLevel=?, boundary=?, source=?, lastModifiedBy=?, lastModifiedTime=?, objectNode=?;
+        - query: INSERT INTO eg_dhis2_boundary_csv(id, name, parent, path, children, boundaryLevel, boundary, source, campaignStartDate, campaignEndDate, objectNode, createdBy, lastModifiedBy, createdTime, lastModifiedTime, boundaryHierarchy) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET name=?, parent=?, path=?, children=?, boundaryLevel=?, boundary=?, source=?, lastModifiedBy=?, lastModifiedTime=?, objectNode=?, boundaryHierarchy=?;
           basePath: $.*
           jsonMaps:
             - jsonPath: $.*.id
@@ -341,6 +341,7 @@ serviceMaps:
             - jsonPath: $.*.objectNode
               type: JSON
               dbType: JSONB
+            - jsonPath: $.*.boundaryHierarchy
 
     - version: 1.0
       description: Persists HCM events into the table
