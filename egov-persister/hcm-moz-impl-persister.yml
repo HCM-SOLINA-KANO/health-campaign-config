@@ -320,6 +320,8 @@ serviceMaps:
 
             - jsonPath: $.*.auditDetails.lastModifiedTime
 
+            - jsonPath: $.*.boundaryHierarchy
+
             - jsonPath: $.*.name
 
             - jsonPath: $.*.parent
@@ -341,6 +343,7 @@ serviceMaps:
             - jsonPath: $.*.objectNode
               type: JSON
               dbType: JSONB
+
             - jsonPath: $.*.boundaryHierarchy
 
     - version: 1.0
