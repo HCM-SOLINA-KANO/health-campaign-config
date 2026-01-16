@@ -89,10 +89,11 @@ serviceMaps:
             - jsonPath: $.*.address.*.auditDetails.createdTime
             - jsonPath: $.*.address.*.auditDetails.lastModifiedTime
             - jsonPath: $.*.address.*.isDeleted
-        - query: INSERT INTO individual_identifier(id, clientReferenceId, identifierType, identifierId, individualId, createdBy, lastModifiedBy, createdTime, lastModifiedTime, isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO individual_identifier(id, clientReferenceId, individualClientReferenceId, identifierType, identifierId, individualId, createdBy, lastModifiedBy, createdTime, lastModifiedTime, isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.*.identifiers.*
           jsonMaps:
             - jsonPath: $.*.identifiers.*.id
+            - jsonPath: $.*.identifiers.*.clientReferenceId
             - jsonPath: $.*.clientReferenceId
             - jsonPath: $.*.identifiers.*.identifierType
             - jsonPath: $.*.identifiers.*.identifierId
